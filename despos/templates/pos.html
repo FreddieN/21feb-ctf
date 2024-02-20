@@ -32,36 +32,36 @@
         </div>
         <div class="col">
         <div class="row m-3">
-            <div class="border border-secondary bg-light">
+            <div style="height: 40vh" class="overflow-y-scroll border border-secondary bg-light">
             <p>Transaction</p>
-            <table class="table">
+            <table class="table " style="max-height: 30vh;">
                 <thead>
                   <tr>
                     <th>Item</th>
-                    <th>Quantity</th>
                     <th>Cost</th>
                   </tr>
                 </thead>
                 <tbody>
+                    {% for entry in cart.entries.all %}
                   <tr>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
+                    <td>{{entry.item.title}}</td>
+                    <td>{{entry.item.price|floatformat:2}}</td>
                   </tr>
-                  
+                  {% endfor %}
                 </tbody>
               </table>
+              <p>Total: <strong>£{{total|floatformat:2}}</strong></p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-primary btn-lg">Checkout</button>
+                <button onclick="window.location.href = '/checkout';" type="button" class="btn btn-primary btn-lg">Checkout</button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-light btn-lg">Receipt</button>
+                <button onclick="window.open('/receipt', '_blank').focus();" type="button" class="btn btn-light btn-lg">Receipt</button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-danger btn-lg">Void Transaction</button>
+                <button onclick="window.location.href = '/void'" type="button" class="btn btn-danger btn-lg">Void Transaction</button>
             </div>
         </div>
         </div>
